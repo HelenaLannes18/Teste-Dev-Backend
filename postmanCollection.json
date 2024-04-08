@@ -258,6 +258,176 @@
           "response": []
         },
         {
+          "name": "Get Task By Name",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Um nome de tarefa\",\n    \"body\": \"Descricao da task\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/tasks?name=Task1",
+              "host": ["{{endpoint}}"],
+              "path": ["api", "tasks?name=Task1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task By Status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Um nome de tarefa\",\n    \"body\": \"Descricao da task\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/tasks?status=concluido",
+              "host": ["{{endpoint}}"],
+              "path": ["api", "tasks?status=concluido"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task By CreatedAt",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Um nome de tarefa\",\n    \"body\": \"Descricao da task\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/tasks?createdAt=2024-04-08T13:17:53.541Z",
+              "host": ["{{endpoint}}"],
+              "path": ["api", "tasks?createdAt=2024-04-08T13:17:53.541Z"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task By FinishedAt",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Um nome de tarefa\",\n    \"body\": \"Descricao da task\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/tasks?finishedAt=2024-04-09T13:17:53.541Z",
+              "host": ["{{endpoint}}"],
+              "path": ["api", "tasks?finishedAt=2024-04-09T13:17:53.541Z"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Tasks",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Um nome de tarefa\",\n    \"body\": \"Descricao da task\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/tasks",
+              "host": ["{{endpoint}}"],
+              "path": ["api", "tasks"]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "Update Task",
           "event": [
             {

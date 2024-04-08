@@ -1,86 +1,75 @@
-import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
-import TaskModel, {
-  TaskDocument,
-  TaskInput,
-} from "../models/task.model";
-import { databaseResponseTimeHistogram } from "../utils/metrics";
+import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+import TaskModel, { TaskDocument, TaskInput } from '../models/task.model';
+import { databaseResponseTimeHistogram } from '../utils/metrics';
 
 export async function createTask(input: TaskInput) {
   const metricsLabels = {
-    operation: "createTask",
+    operation: 'createTask',
   };
 
   const timer = databaseResponseTimeHistogram.startTimer();
   try {
     const result = await TaskModel.create(input);
-    timer({ ...metricsLabels, success: "true" });
+    timer({ ...metricsLabels, success: 'true' });
     return result;
   } catch (e) {
-    timer({ ...metricsLabels, success: "false" });
+    timer({ ...metricsLabels, success: 'false' });
     throw e;
   }
 }
 
-
 export async function findTask(
-    query: FilterQuery<TaskDocument>,
-    options: QueryOptions = { lean: true }
-  ) {
-    const metricsLabels = {
-      operation: "findTask",
-    };
-  
-    const timer = databaseResponseTimeHistogram.startTimer();
-    try {
-      const result = await TaskModel.findOne(query, {}, options);
-      timer({ ...metricsLabels, success: "true" });
-      return result;
-    } catch (e) {
-      timer({ ...metricsLabels, success: "false" });
-  
-      throw e;
-    }
-  }
-
-export async function findAllTasks(
+  query: FilterQuery<TaskDocument>,
   options: QueryOptions = { lean: true }
-  ) {
-    const metricsLabels = {
-      operation: "findTask",
-    };
-  
-    const timer = databaseResponseTimeHistogram.startTimer();
-    try {
-      const result = await TaskModel.find(options);
-      timer({ ...metricsLabels, success: "true" });
-      return result;
-    } catch (e) {
-      timer({ ...metricsLabels, success: "false" });
-  
-      throw e;
-    }
-}
-
-
-export async function findAllTasksByFilter(
-  filter?: FilterQuery<TaskDocument>, 
 ) {
   const metricsLabels = {
-    operation: "findAllTasksByFilter",
+    operation: 'findTask',
   };
 
   const timer = databaseResponseTimeHistogram.startTimer();
   try {
-    const result = await TaskModel.find(filter || {}); 
-    timer({ ...metricsLabels, success: "true" });
+    const result = await TaskModel.findOne(query, {}, options);
+    timer({ ...metricsLabels, success: 'true' });
     return result;
   } catch (e) {
-    timer({ ...metricsLabels, success: "false" });
+    timer({ ...metricsLabels, success: 'false' });
+
     throw e;
   }
 }
 
+export async function findAllTasks(options: QueryOptions = { lean: true }) {
+  const metricsLabels = {
+    operation: 'findAllTasks',
+  };
 
+  const timer = databaseResponseTimeHistogram.startTimer();
+  try {
+    const result = await TaskModel.find(options);
+    timer({ ...metricsLabels, success: 'true' });
+    return result;
+  } catch (e) {
+    timer({ ...metricsLabels, success: 'false' });
+
+    throw e;
+  }
+}
+
+export async function findAllTasksByFilter(filter?: FilterQuery<TaskDocument>) {
+  const metricsLabels = {
+    operation: 'findAllTasksByFilter',
+  };
+
+  const timer = databaseResponseTimeHistogram.startTimer();
+  try {
+    const result = await TaskModel.find(filter || {});
+    timer({ ...metricsLabels, success: 'true' });
+    return result;
+  } catch (e) {
+    timer({ ...metricsLabels, success: 'false' });
+    throw e;
+  }
+}
 
 export async function findAndUpdateTask(
   query: FilterQuery<TaskDocument>,

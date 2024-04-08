@@ -13,6 +13,7 @@ import {
   createTaskSchema,
   deleteTaskSchema,
   getTaskSchema,
+  getTaskSchemaWithParams,
   updateTaskSchema,
 } from './schema/task.schema';
 import {
@@ -45,22 +46,10 @@ function routes(app: Express) {
   );
 
   app.put(
-    '/api/tasks/:taskId',
+    '/api/tasks',
     [requireUser, validateResource(updateTaskSchema)],
     updateTaskHandler
   );
-
-  // app.get(
-  //   "/api/tasks/:taskId",
-  //   validateResource(getTaskSchema),
-  //   getTaskHandler
-  // );
-
-  // app.get(
-  //   "/api/tasks",
-  //   validateResource(getTaskSchema),
-  //   getAllTasksHandler
-  // );
 
   app.get(
     '/api/tasks',
@@ -69,7 +58,7 @@ function routes(app: Express) {
   );
 
   app.delete(
-    '/api/tasks/:taskId',
+    '/api/tasks',
     [requireUser, validateResource(deleteTaskSchema)],
     deleteTaskHandler
   );

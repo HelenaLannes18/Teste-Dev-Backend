@@ -24,15 +24,33 @@ export async function createTaskHandler(
 }
 
 export async function updateTaskHandler(
-  req: Request<UpdateTaskInput['params']>,
+  req: Request<
+    {},
+    {},
+    {},
+    {
+      createdAt?: Date;
+      finishedAt?: Date;
+      status?: string;
+      name?: string;
+      _id?: string;
+    }
+  >,
   res: Response
 ) {
+  const { _id } = req.query;
+
+  let filter: any = {};
+
+  if (_id) {
+    filter._id = _id;
+  }
+
   const userId = res.locals.user._id;
 
-  const taskId = req.params.taskId;
   const update = req.body;
 
-  const task = await findTask({ taskId });
+  const task = await findTask(filter);
 
   if (!task) {
     return res.sendStatus(404);
@@ -42,25 +60,11 @@ export async function updateTaskHandler(
     return res.sendStatus(403);
   }
 
-  const updatedTask = await findAndUpdateTask({ taskId }, update, {
+  const updatedTask = await findAndUpdateTask(filter, update, {
     new: true,
   });
 
   return res.send(updatedTask);
-}
-
-export async function getTaskHandler(
-  req: Request<UpdateTaskInput['params']>,
-  res: Response
-) {
-  const taskId = req.params.taskId;
-  const task = await findTask({ taskId });
-
-  if (!task) {
-    return res.sendStatus(404);
-  }
-
-  return res.send(task);
 }
 
 export async function getAllTasksByFilterHandler(
@@ -68,13 +72,23 @@ export async function getAllTasksByFilterHandler(
     {},
     {},
     {},
-    { createdAt?: Date; finishedAt?: Date; status?: string; name?: string }
+    {
+      createdAt?: Date;
+      finishedAt?: Date;
+      status?: string;
+      name?: string;
+      _id?: string;
+    }
   >,
   res: Response
 ) {
-  const { createdAt, finishedAt, status, name } = req.query;
+  const { createdAt, finishedAt, status, name, _id } = req.query;
 
   let filter: any = {};
+
+  if (_id) {
+    filter._id = _id;
+  }
 
   if (createdAt) {
     const startDate = startOfDay(new Date(createdAt));
@@ -108,13 +122,30 @@ export async function getAllTasksByFilterHandler(
 }
 
 export async function deleteTaskHandler(
-  req: Request<UpdateTaskInput['params']>,
+  req: Request<
+    {},
+    {},
+    {},
+    {
+      createdAt?: Date;
+      finishedAt?: Date;
+      status?: string;
+      name?: string;
+      _id?: string;
+    }
+  >,
   res: Response
 ) {
   const userId = res.locals.user._id;
-  const taskId = req.params.taskId;
+  const { _id } = req.query;
 
-  const task = await findTask({ taskId });
+  let filter: any = {};
+
+  if (_id) {
+    filter._id = _id;
+  }
+
+  const task = await findTask(filter);
 
   if (!task) {
     return res.sendStatus(404);
@@ -124,7 +155,7 @@ export async function deleteTaskHandler(
     return res.sendStatus(403);
   }
 
-  await deleteTask({ taskId });
+  await deleteTask(filter);
 
   return res.sendStatus(200);
 }

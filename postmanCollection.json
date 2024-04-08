@@ -250,9 +250,9 @@
               }
             },
             "url": {
-              "raw": "{{endpoint}}/api/tasks/{{taskId}}",
+              "raw": "{{endpoint}}/api/tasks?_id={{taskId}}",
               "host": ["{{endpoint}}"],
-              "path": ["api", "tasks", "{{taskId}}"]
+              "path": ["api", "tasks?_id={{taskId}}"]
             }
           },
           "response": []
@@ -474,9 +474,9 @@
               }
             },
             "url": {
-              "raw": "{{endpoint}}/api/tasks/{{taskId}}",
+              "raw": "{{endpoint}}/api/tasks",
               "host": ["{{endpoint}}"],
-              "path": ["api", "tasks", "{{taskId}}"]
+              "path": ["api", "tasks?_id={{taskId}}"]
             }
           },
           "response": []
@@ -528,9 +528,9 @@
               }
             },
             "url": {
-              "raw": "{{endpoint}}/api/tasks/{{taskId}}",
+              "raw": "{{endpoint}}/api/tasks?_id={{taskId}}",
               "host": ["{{endpoint}}"],
-              "path": ["api", "tasks", "{{taskId}}"]
+              "path": ["api", "tasks?_id={{taskId}}"]
             }
           },
           "response": []

@@ -1,12 +1,12 @@
 {
-  "name": "rest-api-tutorial-updated",
+  "name": "rest-api-teste-backend",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Tom Nagle",
+  "author": "Helena Lannes",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "build": "yarn run build",
+    "build": "tsc",
     "start": "ts-node-dev --respawn --transpile-only src/app.ts",
     "test": "jest"
   },
